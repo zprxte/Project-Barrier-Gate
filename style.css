@@ -1,0 +1,889 @@
+body {
+    font-family: 'Tahoma', sans-serif;
+    margin: 0;
+    padding: 0;
+    /* เปลี่ยนจาก background-color: #f0f0f0; เป็นรูปภาพพื้นหลัง */
+    background-image: url('image/userbackground.png'); /* ใช้รูปภาพเป็นพื้นหลัง */
+    background-size: cover; /* ครอบคลุมพื้นที่ทั้งหมด */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #ffe203; /* สีสำรองเผื่อรูปภาพโหลดไม่ได้ (สีเหลืองเดิม) */
+    
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* พื้นหลังสีเหลือง (เดิม) หรือ พื้นหลังรูปภาพ (สำหรับ index.html) */
+.main-container {
+    background-color: transparent; /* เปลี่ยนเป็น transparent เพื่อให้เห็นพื้นหลัง body */
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* *** สไตล์ใหม่สำหรับหน้า index.html เท่านั้น (พื้นหลังรูปภาพ) *** */
+body.index-page {
+    background-image: url('image/userbackground.png'); /* ใช้รูปภาพเป็นพื้นหลัง */
+    background-size: cover; /* ครอบคลุมพื้นที่ทั้งหมด */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #ffe203; /* สีสำรองเผื่อรูปภาพโหลดไม่ได้ (สีเหลืองเดิม) */
+    
+    /* เพิ่มการจัดเรียงเพื่อให้กล่องอยู่ทางขวา */
+    display: flex; 
+    flex-direction: column;
+}
+
+/* สไตล์ใหม่เพื่อจัดตำแหน่งกล่องไปทางขวา */
+.login-options-container {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end; /* จัดให้อยู่ทางขวา */
+    align-items: center;
+    padding-right: 120px; /* เว้นระยะจากขอบขวา */
+}
+/* ******************************************* */
+
+/* ส่วนหัว (Header) */
+.hcu-header {
+    background-color: #C00000; /* สีแดงเข้มหลัก */
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+/* ส่วนโลโก้ (สำหรับรองรับ <img class="hcu-logo">) */
+.logo-area {
+    background-color: #ffffff; /* สีขาวสำหรับพื้นหลังโลโก้ */
+    padding: 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hcu-logo {
+    height: 55px; /* ปรับขนาดให้เหมาะสมกับ Header */
+    width: auto;
+    display: block;
+}
+
+.system-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-left: 50px;
+    padding: 10px 20px;
+}
+
+/* กรอบสีขาวสำหรับปุ่ม */
+.login-options {
+    background-color: white;
+    padding: 100px 70px; /* ปรับ padding ให้กล่องสูงขึ้น */
+    border-radius: 20px; /* ทำให้มนขึ้น */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    width: 500px; /* กำหนดความกว้างใหม่ */
+    /* จัดเรียงข้อความและปุ่มให้อยู่กึ่งกลางในกล่อง */
+    flex-direction: column;
+    align-items: center; 
+}
+
+/* จัดปุ่ม User และ Admin ให้อยู่ในแถวเดียวกัน */
+.login-button-row {
+    display: flex;
+    gap: 80px;
+    justify-content: center;
+    align-items: flex-end; /* จัดให้ปุ่มเรียงกันสวยงาม */
+}
+
+/* --- เพิ่มสไตล์สำหรับข้อความ "เลือกประเภทผู้ใช้" --- */
+.login-options h2 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 120px;
+    text-align: center;
+}
+
+/* สไตล์ปุ่มหลัก */
+.login-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end; /* จัดตำแหน่งข้อความไว้ด้านล่าง */
+    width: 220px;
+    height: 250px; /* เพิ่มความสูงเพื่อให้มีพื้นที่สำหรับไอคอนและข้อความ */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    background-color: transparent; /* ตั้งเป็น transparent เพื่อเน้นที่ไอคอน */
+    color: #C00000; /* สีข้อความหลัก */
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 100px; /* ระยะห่างจากด้านล่าง */
+    position: relative; /* สำคัญสำหรับการวางไอคอนแบบ absolute */
+}
+
+/* สไตล์ไอคอน (Default: สำหรับปุ่ม Admin) */
+.icon {
+    font-size: 100px; /* ขนาดไอคอนใหญ่ขึ้น */
+    color: #C00000; /* สีไอคอนเป็นสีแดง */
+    position: absolute;
+    top: -50px; /* ปรับตำแหน่งไอคอนให้อยู่สูงขึ้นเล็กน้อย */
+}
+
+/* สไตล์สำหรับข้อความปุ่ม (Base style: ใช้สำหรับ Admin และ User) */
+.login-button span {
+    display: block;
+    background-color: #C00000; /* พื้นหลังสีแดงของข้อความ */
+    color: white;
+    padding: 8px 25px; /* ปรับ Padding ให้เล็กและกระชับขึ้น */
+    border-radius: 30px; /* ทำให้โค้งมนเป็นแคปซูล/pill */
+    margin-top: 10px; /* ลดระยะห่างจากไอคอน */
+    transition: background-color 0.3s;
+    white-space: nowrap; /* ป้องกันการขึ้นบรรทัดใหม่โดยไม่จำเป็น */
+    font-size: 20px; /* ปรับขนาดตัวอักษรให้เหมาะสม */
+    font-weight: bold; /* ให้ตัวหนา */
+}
+
+.login-button:hover {
+    transform: translateY(-5px);
+    opacity: 0.9;
+}
+
+
+/* *** สไตล์เฉพาะสำหรับปุ่มผู้ใช้ทั่วไป (User Button) *** */
+
+/* 1. ไอคอนมีวงแหวนรอบและสีแดงเต็ม */
+
+
+/* 2. ข้อความผู้ใช้ทั่วไปมีพื้นหลังสีแดง (ใช้สไตล์ base .login-button span) */
+.user-button span {
+    /* ใช้สไตล์จาก .login-button span โดยตรง */
+    color: white; 
+    background-color: #C00000; 
+    font-size: 20px;
+    margin-top: 15px; /* ปรับระยะห่างให้พอดีกับไอคอนที่มีวงแหวน */
+}
+
+
+/* 3. ปุ่ม Admin Icon (เพื่อให้มั่นใจว่าถูกต้อง) */
+.admin-button .icon {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    font-size: 100px; 
+    top: -50px;
+}
+/* *** สิ้นสุดสไตล์เฉพาะสำหรับ User Button *** */
+
+
+/* --- สไตล์สำหรับหน้า Login โดยเฉพาะ (user_login.html และ admin_login.html) --- */
+
+/* กล่องล็อคอินสีขาว */
+.login-box {
+    background-color: white;
+    padding: 80px 80px; /* เพิ่ม padding ให้กล่องใหญ่ขึ้น */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    width: 380px; /* ขยายความกว้าง */
+    text-align: center;
+    position: relative; /* สำหรับจัดวางไอคอน */
+}
+
+/* ไอคอนรูปคนสีแดง (วงกลมแดง) */
+.user-icon-circle {
+    position: absolute;
+    top: -50px; /* เลื่อนไอคอนขึ้นไปด้านบนกล่อง */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    border: 10px solid #C00000; /* ขอบสีแดงหนา */
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-user-lg {
+    font-size: 60px;
+    color: #C00000;
+}
+
+/* ช่องกรอกข้อมูล (Input) */
+.login-input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: none; /* ลบเส้นขอบออก */
+    border-radius: 30px; /* ทำให้โค้งมน */
+    background-color: #e0e0e0; /* สีพื้นหลังเทาอ่อนตามภาพ */
+    font-size: 16px;
+    text-align: center; /* จัดให้อยู่ตรงกลาง */
+    box-sizing: border-box; 
+    margin-top: 15px;
+}
+
+/* ปุ่มเข้าสู่ระบบ (สีแดง) */
+.submit-button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 30px; /* ทำให้โค้งมน */
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    width: 100%;
+    transition: background-color 0.3s;
+    display: block;
+    text-decoration: none; /* สำหรับปุ่มลิงก์ */
+    box-sizing: border-box;
+}
+
+.red-button {
+    background-color: #C00000;
+    color: white;
+    margin-top: 15px;
+}
+
+.red-button:hover {
+    background-color: #E35353;
+}
+
+/* ข้อความถามลงทะเบียน */
+.register-question {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #666;
+}
+
+/* ปุ่มลงทะเบียน (สีเหลือง) */
+.yellow-button {
+    background-color: #fff200; /* สีเหลืองสว่างตามภาพ */
+    color: #333; /* สีตัวอักษรเข้ม */
+    margin-top: 5px;
+}
+
+.yellow-button:hover {
+    background-color: #ffda00;
+}
+
+
+
+
+
+/* --- สไตล์เพิ่มเติมสำหรับหน้าชำระเงิน (payment_page.php) --- */
+
+.payment-info {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.amount-display {
+    font-size: 80px; /* ขนาดตัวเลข 200.00 */
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.amount-label {
+    font-size: 18px;
+    color: #888;
+}
+
+.payment-form {
+    display: flex; /* จัดเรียงช่องกรอกและปุ่มในแถวเดียว */
+    justify-content: center; /* จัดให้อยู่ตรงกลาง */
+    gap: 15px; /* ระยะห่างระหว่างช่องกรอกกับปุ่ม */
+    margin-top: 30px;
+}
+
+.payment-input-field {
+    /* ใช้สไตล์เดียวกับ reg-input-field แต่อาจจะต้องกำหนดความกว้างเฉพาะ */
+    width: 250px; 
+    height: 55px; 
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 20px;
+    box-sizing: border-box;
+    text-align: center; /* ให้ตัวเลขอยู่ตรงกลางช่อง */
+}
+
+.green-button {
+    background-color: #4CAF50; /* สีเขียวสำหรับปุ่มชำระเงิน */
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.payment-button {
+    height: 55px; 
+    width: 150px;
+    font-size: 20px;
+}
+
+.error {
+    color: #C00000;
+    font-weight: bold;
+}
+
+
+/* CSS สำหรับหน้าลงทะเบียนแบบ Label ซ้าย Input ขวา */
+
+.registration-box-label-input {
+    background-color: white;
+    padding: 60px 80px;
+    border-radius: 15px; /* มุมโค้งมน */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 700px; /* ความกว้างกล่อง */
+    max-width: 90%;
+}
+
+/* จัด Layout ด้วย Grid: Label 40% | Input 60% */
+.form-row {
+    display: grid;
+    grid-template-columns: 40% 55%; /* แบ่งสัดส่วน */
+    gap: 20px; /* ระยะห่างระหว่าง Label กับ Input */
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.form-row label {
+    text-align: right; /* Label ชิดขวาให้ติดกับช่องกรอก */
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.reg-input-field {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 18px;
+    background-color: #fff; /* พื้นหลังสีขาว */
+    box-sizing: border-box;
+}
+
+.reg-input-field:focus {
+    border-color: #C00000;
+    outline: none;
+}
+
+/* จัดปุ่มให้อยู่กึ่งกลาง */
+.form-row-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.message-area.error {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+
+/* --- สไตล์เพิ่มเติมสำหรับหน้า Payment (ตามรูป) --- */
+
+.payment-content {
+    text-align: center;
+    padding: 20px;
+}
+
+.payment-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 30px;
+}
+
+.amount-highlight {
+    font-size: 80px; /* ตัวเลขขนาดใหญ่ */
+    font-weight: bold;
+    color: #000;
+    margin: 0;
+    line-height: 1;
+}
+
+.amount-label {
+    font-size: 16px;
+    color: #666;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+.payment-form-row {
+    display: flex; /* จัดเรียงช่องกรอกและปุ่มในแถวเดียว */
+    justify-content: center; /* จัดให้อยู่ตรงกลาง */
+    gap: 10px; /* ระยะห่างระหว่างช่องกรอกกับปุ่ม */
+}
+
+.payment-input {
+    width: 200px;
+    height: 45px;
+    padding: 5px 15px;
+    font-size: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.green-button {
+    background-color: #00b900; /* สีเขียวสำหรับปุ่มชำระเงิน */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    height: 45px; /* สูงเท่าช่องกรอก */
+    padding: 0 25px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.green-button:hover {
+    background-color: #009900;
+}
+
+.error-msg {
+    color: red;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* --- ส่วนเสริมสำหรับหน้า Payment --- */
+.payment-content {
+    text-align: center;
+    padding: 20px;
+}
+
+.payment-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 30px;
+}
+
+.amount-highlight {
+    font-size: 80px; /* ตัวเลขขนาดใหญ่ 200.00 */
+    font-weight: bold;
+    color: #000;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+.amount-label {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+.payment-form-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.payment-input {
+    width: 200px;
+    height: 45px;
+    padding: 5px 10px;
+    font-size: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.green-button {
+    background-color: #00b900; /* สีเขียว */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    height: 45px;
+    padding: 0 20px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.green-button:hover {
+    background-color: #009900;
+}
+
+.error-msg {
+    color: red;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* --- เพิ่มเติมสำหรับ Admin Dashboard (แบบใหม่) --- */
+
+/* ปรับ Title ของ Admin ให้กว้างและจัดกึ่งกลาง */
+.admin-title-container {
+    flex-grow: 1;
+    text-align: center;
+    padding-right: 80px; /* ชดเชยความกว้างโลโก้เพื่อให้ข้อความอยู่ตรงกลางจอจริงๆ */
+}
+
+.admin-title {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+/* กล่อง Dashboard สีขาวขนาดใหญ่ */
+.admin-dashboard-card {
+    background-color: white;
+    border-radius: 20px;
+    width: 800px;
+    height: 450px; /* กำหนดความสูงให้ดูโปร่งเหมือนรูป */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative; /* เพื่อให้จัดปุ่ม logout แบบ absolute ได้ */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-button-container {
+    display: flex;
+    gap: 60px; /* ระยะห่างระหว่างสองปุ่ม */
+}
+
+/* ปุ่มสีแดงขนาดใหญ่ (วงรี) */
+.admin-big-btn {
+    background-color: #C00000;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 20px 40px;
+    border-radius: 50px; /* ทำเป็นรูปแคปซูล */
+    width: 280px;
+    text-align: center;
+    transition: transform 0.2s, background-color 0.2s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.admin-big-btn:hover {
+    background-color: #a00000;
+    transform: scale(1.05); /* ขยายเล็กน้อยเมื่อเอาเมาส์ชี้ */
+}
+
+/* พื้นที่ปุ่ม Logout มุมขวาล่าง */
+.logout-area {
+    position: absolute;
+    bottom: 30px;
+    right: 40px;
+}
+
+.logout-pill-btn {
+    background-color: #C00000;
+    color: white;
+    text-decoration: none;
+    padding: 10px 30px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.logout-pill-btn:hover {
+    background-color: #800000;
+}
+
+
+/* --- สไตล์สำหรับหน้าตาราง (Table) --- */
+
+.table-card {
+    background-color: white;
+    border-radius: 15px;
+    padding: 40px;
+    width: 900px;
+    max-width: 95%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    min-height: 400px;
+}
+
+.back-link {
+    text-decoration: none;
+    color: #666;
+    font-size: 16px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+.back-link:hover { color: #000; }
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.data-table th {
+    background-color: #C00000;
+    color: white;
+    padding: 15px;
+    text-align: left;
+    border-radius: 5px 5px 0 0; /* มนหัวตาราง */
+}
+/* ทำให้หัวตารางตัวแรกและตัวสุดท้ายมน */
+.data-table th:first-child { border-top-left-radius: 10px; }
+.data-table th:last-child { border-top-right-radius: 10px; }
+
+.data-table td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.data-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* ป้ายสถานะ */
+.status-paid-badge {
+    background-color: #e6fffa;
+    color: #00b900;
+    padding: 5px 15px;
+    border-radius: 20px;
+    border: 1px solid #00b900;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.status-unpaid-badge {
+    background-color: #fff5f5;
+    color: #ff0000;
+    padding: 5px 15px;
+    border-radius: 20px;
+    border: 1px solid #ff0000;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* --- สไตล์สำหรับช่องค้นหา (Search Bar) ในหน้า Admin --- */
+
+/* จัดเรียงปุ่มย้อนกลับให้อยู่ซ้าย และช่องค้นหาอยู่ขวา */
+.table-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* ฟอร์มค้นหา */
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ช่องกรอกข้อความ */
+.search-input {
+    padding: 8px 15px;
+    border: 2px solid #ddd;
+    border-radius: 20px;
+    font-size: 16px;
+    width: 250px; /* ความกว้างช่องค้นหา */
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.search-input:focus {
+    border-color: #C00000; /* เปลี่ยนขอบเป็นสีแดงเมื่อคลิกพิมพ์ */
+}
+
+/* ปุ่มค้นหา */
+.search-btn {
+    background-color: #C00000;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-btn:hover {
+    background-color: #a00000;
+}
+
+/* ปุ่มล้างค่า (ดูทั้งหมด) */
+.clear-search-btn {
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+    border-bottom: 1px solid #666;
+}
+
+.clear-search-btn:hover {
+    color: #C00000;
+    border-color: #C00000;
+}
+/* --- สไตล์สำหรับหน้าเช็คข้อมูล (Check Data) --- */
+
+.check-data-card {
+    background-color: white;
+    border-radius: 20px;
+    width: 800px; /* ขนาดกว้างเท่า Dashboard */
+    min-height: 450px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative; /* เพื่อให้วางปุ่มมุมขวาล่างได้ */
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+/* หัวข้อ "เช็คข้อมูล" มุมซ้ายบน */
+.page-title-left {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0;
+    color: #000;
+    position: absolute;
+    top: 40px;
+    left: 50px;
+}
+
+/* กล่องค้นหาตรงกลาง */
+.search-center-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top: 100px; /* ดันลงมาให้อยู่กลางๆ */
+}
+
+/* ช่อง Input ใหญ่ */
+.big-input {
+    padding: 10px 15px;
+    font-size: 20px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+    outline: none;
+    color: #aaa; /* สี Placeholder ออกเทาๆ */
+}
+.big-input:focus {
+    color: #000;
+    border-color: #C00000;
+}
+
+/* ปุ่มค้นหา สีแดงเหลี่ยม */
+.red-square-btn {
+    background-color: #DA0000; /* แดงสด */
+    color: white;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 12px 30px; /* ขนาดปุ่ม */
+    border-radius: 2px; /* มุมมนเล็กน้อยตามรูป */
+    cursor: pointer;
+    margin-left: 10px;
+}
+.red-square-btn:hover {
+    background-color: #b00000;
+}
+
+/* ปุ่ม "กลับ" มุมขวาล่าง */
+.bottom-right-container {
+    position: absolute;
+    bottom: 30px;
+    right: 40px;
+}
+
+.back-pill-btn {
+    background-color: #DA0000;
+    color: white;
+    text-decoration: none;
+    padding: 10px 40px;
+    border-radius: 30px; /* ทรงแคปซูล */
+    font-size: 20px;
+    font-weight: bold;
+    display: inline-block;
+}
+.back-pill-btn:hover {
+    background-color: #b00000;
+}
+
+/* พื้นที่แสดงผลลัพธ์ (จะโชว์เมื่อค้นหาแล้ว) */
+.search-result-area {
+    margin-top: 40px;
+}
+/* --- สไตล์สำหรับหน้า Info Card (ผลลัพธ์การค้นหาแบบเดี่ยว) --- */
+
+.info-card {
+    background-color: white;
+    border-radius: 20px;
+    width: 800px;
+    min-height: 450px;
+    padding: 60px 80px; /* จัด Padding ให้เนื้อหาอยู่กลางๆ */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* จัดเนื้อหาแนวดิ่งกึ่งกลาง */
+}
+
+/* จัดแถวข้อมูล (Label ซ้าย - Value ขวา) */
+.detail-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px; /* ระยะห่างระหว่างบรรทัด */
+    font-size: 24px; /* ขนาดตัวอักษรใหญ่ตามรูป */
+    color: #000;
+}
+
+.detail-label {
+    width: 300px; /* ความกว้างฝั่งคำอธิบาย */
+    text-align: right; /* ชิดขวา */
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.detail-value {
+    font-weight: normal; /* ตัวธรรมดา */
+    text-align: left;
+}
+
+/* สีสถานะ */
+.text-paid {
+    color: #00b900; /* เขียวสด */
+    font-weight: bold;
+}
+
+.text-unpaid {
+    color: #C00000; /* แดง */
+    font-weight: bold;
+}
+
+/* ปุ่มเพิกถอนสิทธิ์ */
+.revoke-btn-container {
+    margin-top: 30px;
+    margin-left: 100px; /* ขยับให้ตรงแนวกับข้อมูล */
+}
+
+.revoke-button {
+    background-color: #DA0000;
+    color: white;
+    text-decoration: none;
+    padding: 12px 30px;
+    border-radius: 30px; /* ทรงแคปซูล */
+    font-size: 20px;
+    font-weight: bold;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+}
+
+.revoke-button:hover {
+    background-color: #b00000;
+}

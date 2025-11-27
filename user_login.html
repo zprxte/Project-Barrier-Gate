@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เข้าสู่ระบบผู้ใช้ - ระบบจอดรถ HCU</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <header class="hcu-header">
+        <div class="logo-area">
+            <img src="image/logoHCU.png" alt="โลโก้ HCU" class="hcu-logo"> 
+        </div>
+        <div class="system-title">เข้าสู่ระบบสำหรับผู้ใช้ทั่วไป</div>
+    </header>
+
+    <div class="main-container">
+        
+        <div class="login-box">
+            
+            <div class="user-icon-circle">
+                <i class="fas fa-user icon-user-lg"></i>
+            </div>
+            
+            <form id="userLoginForm">
+                
+                <input type="text" id="username" name="username" placeholder="รหัสบุคลากร / นักศึกษา" maxlength="6"  required class="login-input">
+
+                <input type="password" id="password" name="password" placeholder="กรอกรหัสผ่าน" required class="login-input">
+
+                <button type="submit" class="submit-button red-button">เข้าสู่ระบบ</button>
+                
+                <p class="register-question">ยังไม่ได้ลงทะเบียน?</p>
+                <a href="registration.html" class="submit-button yellow-button">ลงทะเบียนป้ายทะเบียน</a>
+
+                <div style="margin-top: 20px;">
+                    <a href="index.html" style="color: #888; text-decoration: none; font-size: 16px; font-weight: bold;">
+                        <i class="fas fa-arrow-left"></i> กลับหน้าหลัก
+                    </a>
+                </div>
+
+                <p id="loginMessage" class="message-area"></p>
+            </form>
+            
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('userLoginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const form = this;
+            const messageArea = document.getElementById('loginMessage');
+            
+            fetch('login_process.php', {
+                method: 'POST',
+                body: new FormData(form)
+            })
+            .then(response => response.json())
+            .then(data => {
+                messageArea.textContent = data.message;
+                messageArea.className = data.success ? 'message-area success' : 'message-area error';
+                
+                if (data.success) {
+                    window.location.href = data.redirect; 
+                }
+            })
+            .catch(error => {
+                messageArea.textContent = 'เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์';
+                messageArea.className = 'message-area error';
+            });
+        });
+    </script>
+
+</body>
+</html>

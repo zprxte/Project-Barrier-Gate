@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ลงทะเบียนผู้ใช้ - HCU Parking</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+
+    <header class="hcu-header">
+        <div class="logo-area">
+            <img src="image/logoHCU.png" alt="โลโก้ HCU" class="hcu-logo"> 
+        </div>
+        <div class="system-title">ลงทะเบียนสมัครใช้บริการระบบสแกนป้ายทะเบียน</div>
+    </header>
+
+    <div class="main-container">
+        
+        <div class="registration-box-label-input">
+            <form id="registrationForm" class="label-input-form">
+                
+                <div class="form-row">
+                    <label for="user_type">ประเภทผู้ใช้</label>
+                    <select id="user_type" name="user_type" required class="reg-input-field">
+                        <option value="" disabled selected hidden>--กรุณาเลือก--</option>
+                        <option value="บุคลากร">บุคลากร</option>
+                        <option value="นักศึกษา">นักศึกษา</option>
+                    </select>
+                </div>
+                
+                <div class="form-row">
+                    <label for="user_id">รหัสบุคลากร / นักศึกษา</label>
+                    <input type="text" id="user_id" name="user_id" required class="reg-input-field" maxlength="6" title="กรุณาใส่ตัวเลข 6 หลัก">
+                </div>
+                
+                <div class="form-row">
+                    <label for="password">รหัสผ่าน</label>
+                    <input type="password" id="password" name="password" required class="reg-input-field">
+                </div>
+                
+                <div class="form-row">
+                    <label for="confirm_password">ยืนยันรหัสผ่าน</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required class="reg-input-field">
+                </div>
+                
+                <p id="message" class="message-area error" style="display:none; text-align: center;"></p>
+                
+                <div class="form-row-btn"> 
+                    <button type="submit" class="submit-button red-button" style="width: 200px;">ลงทะเบียน</button>
+                </div>
+                <div style="margin-top: 20px; text-align: center;">
+                    <a href="index.html" style="color: #888; text-decoration: none; font-size: 16px; font-weight: bold;">
+                        <i class="fas fa-arrow-left"></i> กลับหน้าหลัก
+                    </a>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+            const messageArea = document.getElementById('message');
+            
+            messageArea.style.display = 'none';
+            
+            if (password !== confirmPassword) {
+                messageArea.textContent = 'รหัสผ่านและยืนยันรหัสผ่านไม่ตรงกัน';
+                messageArea.style.display = 'block';
+                return;
+            }
+
+            const form = this;
+            fetch('registration_process.php', {
+                method: 'POST',
+                body: new FormData(form)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = 'user_dashboard.php'; 
+                } else {
+                    messageArea.textContent = data.message;
+                    messageArea.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                messageArea.textContent = 'เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์';
+                messageArea.style.display = 'block';
+            });
+        });
+    </script>
+
+</body>
+</html>
