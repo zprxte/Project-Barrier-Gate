@@ -25,19 +25,15 @@
 
 ### 1. หน้าแรกและเข้าสู่ระบบ (Home & Login)
 หน้าจอหลักสำหรับต้อนรับผู้ใช้งานและเข้าสู่ระบบของแต่ละระดับสิทธิ์
-![Home Page](image/your-home-screenshot.png)
 
 ### 2. หน้าจัดการของผู้ใช้งาน (User Dashboard & Parking Form)
 ผู้ใช้สามารถลงทะเบียนรถยนต์ บันทึกการเข้าจอด และดูประวัติการจอดรถของตนเองได้
-![User Dashboard](image/your-user-dashboard.png)
 
 ### 3. ระบบชำระเงิน (Payment System)
 หน้าระบบชำระเงินค่าบริการจอดรถ พร้อมการยืนยันสถานะ (Payment Success)
-![Payment Page](image/your-payment-screenshot.png)
 
 ### 4. หน้าผู้ดูแลระบบและผู้บริหาร (Admin & Executive Dashboard)
 แสดงภาพรวมของระบบ ข้อมูลรถที่เข้าจอด ตรวจสอบการชำระเงิน และการจัดการสิทธิ์
-![Admin Dashboard](image/your-admin-dashboard.png)
 
 ---
 
